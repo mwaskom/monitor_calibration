@@ -1,5 +1,4 @@
-
-from psychopy import visual, event
+from psychopy import core, visual, event
 
 
 if __name__ == "__main__":
@@ -12,7 +11,6 @@ if __name__ == "__main__":
         size = [1024, 768]
 
     gamma = None
-
 
     win = visual.Window(size=size,
                         units="norm",
@@ -29,16 +27,17 @@ if __name__ == "__main__":
 
     text = visual.TextStim(win,
                            pos=(.7, .7),
-                           flipHoriz=True,
                            height=.08)
                             
 
+    current_index = 0
     digit_vals = [0, 10, 20, 40, 60, 80, 100, 120,
                   140, 160, 180, 200, 220, 240, 255]
+    keys = ["left", "right", "escape"]
 
+    while True:
 
-    for digit in digit_vals:
-
+        digit = digit_vals[current_index]
 
         light.color = digit
         text.text = digit
@@ -47,4 +46,16 @@ if __name__ == "__main__":
         text.draw()
         win.flip()
 
-        event.waitKeys()
+        action, = event.waitKeys(keyList=keys)
+
+        print(action)
+
+        if action == "left":
+            current_index -= 1
+        elif action == "right":
+            current_index += 1
+        elif action == "escape":
+            core.quit()
+
+        current_index = max(current_index, 0)
+        current_index = min(current_index, len(digit_vals) - 1)
