@@ -3,6 +3,7 @@ from __future__ import division, print_function
 import matplotlib as mpl
 mpl.use("Agg")
 
+import os
 import sys
 import numpy as np
 import pandas as pd
@@ -24,7 +25,11 @@ def main(arglist):
     fit_params, _ = curve_fit(expfun, df["Digit"], df["Lv"], init_params)
 
     f = plot_results(df, *fit_params)
-    f.savefig(fname[:-3] + "png")
+
+    if not os.path.exists("images"):
+        os.makedir("images")
+    img_fname = os.path.join("images", os.path.basename(fname)[:-1] + "png")
+    f.savefig(img_fname)
 
     gamma, max, min = fit_params
 
