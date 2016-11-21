@@ -28,7 +28,9 @@ def main(arglist):
 
     if not os.path.exists("images"):
         os.makedir("images")
-    img_fname = os.path.join("images", os.path.basename(fname)[:-1] + "png")
+
+    img_fstem = os.path.basename(fname)[:-4] 
+    img_fname = os.path.join("images", img_fstem + ".png")
     f.savefig(img_fname)
 
     gamma, max, min = fit_params
