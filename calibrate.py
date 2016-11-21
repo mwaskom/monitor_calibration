@@ -48,8 +48,6 @@ if __name__ == "__main__":
 
         action, = event.waitKeys(keyList=keys)
 
-        print(action)
-
         if action == "left":
             current_index -= 1
         elif action == "right":
