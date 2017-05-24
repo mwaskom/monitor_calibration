@@ -27,7 +27,7 @@ def main(arglist):
     f = plot_results(df, *fit_params)
 
     if not os.path.exists("images"):
-        os.makedir("images")
+        os.mkdir("images")
 
     img_fstem = os.path.basename(fname)[:-4] 
     img_fname = os.path.join("images", img_fstem + ".png")
